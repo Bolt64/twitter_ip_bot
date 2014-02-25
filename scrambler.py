@@ -1,7 +1,16 @@
 #!/usr/bin/python3
 
 """
-Scrambles the ip address in a suitable manner
+Scrambles the ip address in a suitable manner and adds a timestamp as well.
+
+If you are worried about directly tweeting your public ip address
+on twitter, the scramble function takes in an ip address if given, else
+it determines the ip on its own and scrambles it so it's still readable
+although it doesn't look like an ip address. Change the scrambled text to suit 
+your needs.
+
+For example, the ip address 12.127.3.45 is scrambled to
+12 years a slave. 127 hours. 3 days of misery. Core temperature 45 degree celsius
 """
 
 import get_ip as ip

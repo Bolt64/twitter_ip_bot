@@ -1,7 +1,21 @@
 #!/usr/bin/env python3
 
 """
-Main function of the program. Regularly checks the ip address. If changed, posts the new ip on twitter.
+Main function of the program. Regularly checks the ip address. If changed,
+posts the new ip on twitter.
+
+This file also serves as a config file outlining the various parameters of 
+this script.
+
+INTERVAL refers to the number of seconds the bot should sleep before
+checking if the ip address has changed.
+
+SECURITY_TOKEN_FILE refers to the file that contains your security tokens 
+obtained from twitter to login your bot.
+
+RECIPIENT refers to the username of the user you want send a direct message to 
+
+LOGFILE refers to the absolute path of the logfile.
 """
 
 import twitter_bot_methods as twitter_bot
@@ -12,8 +26,8 @@ import logging
 
 INTERVAL=300                              # Interval after which the program checks its ip address
 SECURITY_TOKEN_FILE="security_tokens"     # File containing the security tokens
-RECIPIENT="sayantan_khan"                 # The default recipient of the bot's direct messages
-LOGFILE="/home/bolt/.twitter-bot.log"
+RECIPIENT="user"                          # The default recipient of the bot's direct messages
+LOGFILE="/home/$USER/.twitter-bot.log"
 
 def main(security_token_file=SECURITY_TOKEN_FILE, interval=INTERVAL):
 
@@ -56,9 +70,14 @@ def main(security_token_file=SECURITY_TOKEN_FILE, interval=INTERVAL):
             logger.debug('Posting ip to twitter.')
             last_ip=current_ip
             scrambled=scrambler.scramble(current_ip)
+
+# This part posts the ip on twitter. I have disabled it in favour of sending
+# direct messages
 #            twitter_bot.post_status(bot,scrambled)
+            
             logger.debug('Sending dm to {}'.format(RECIPIENT))
             logger.debug(scrambled)
+            
             twitter_bot.message_user(bot,RECIPIENT, scrambled)
 
         else:
